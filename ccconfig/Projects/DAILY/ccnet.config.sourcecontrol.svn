@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+	<sourcecontrol type="svn">
+		<trunkUrl>$(checkoutUrl)</trunkUrl>
+		<executable>$(svnExe)</executable>
+		<username>develooper</username>
+		<password>XXXX</password>
+	</sourcecontrol>
+
+</cb:config-template>

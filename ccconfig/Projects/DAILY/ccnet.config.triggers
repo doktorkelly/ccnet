@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+		<triggers>
+			<intervalTrigger name="noname" initialSeconds="0"/>
+		</triggers>
+
+</cb:config-template>

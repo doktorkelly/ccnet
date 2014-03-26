@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+		<tasks>
+
+			<!-- ================================================================= -->
+			<!-- build                                                             -->
+			<!-- result in bin\$(Configuration) -->
+			<msbuild>
+  			<workingDirectory>$(solutionDir)</workingDirectory>
+				<executable>$(msBuild)</executable>
+				<projectFile>$(buildFile)</projectFile>
+				<targets>Build</targets>
+				<buildArgs>/v:minimal /p:Configuration=Debug</buildArgs>
+				<logger>$(msBuildLogger)</logger>
+			</msbuild>
+
+
+			<!-- ================================================================= -->
+			<!-- test and coverage Unit Tests (UT)                                 -->
+			<!-- result in reports/NUnitReport.xml -->
+			<msbuild>
+  			<workingDirectory>$(solutionDir)</workingDirectory>
+				<executable>$(msBuild)</executable>
+				<projectFile>$(buildFile)</projectFile>
+				<targets>NUTest-UT</targets>
+				<buildArgs>/v:minimal /p:Configuration=Debug</buildArgs>
+				<logger>$(msBuildLogger)</logger>
+			</msbuild>
+
+		</tasks>
+
+		<!-- =================================================================== -->
+		<publishers>
+			<merge>
+				<files>
+					<file action="Merge">$(reportsNUTestUT)\NUnitReport.xml</file>
+				</files>
+			</merge>
+
+			<xmllogger />
+		</publishers>
+
+</cb:config-template>

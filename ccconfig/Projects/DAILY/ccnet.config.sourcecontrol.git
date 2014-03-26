@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+		<sourcecontrol type="git">
+			<repository>https://doktorkelly:XXXX@github.com/doktorkelly/contosouniversity.git</repository>
+			<executable>$(gitExe)</executable>
+		</sourcecontrol>
+
+</cb:config-template>

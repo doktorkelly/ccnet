@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+	<cb:scope
+		msBuild="C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
+		gitExe="D:\programme\Git\bin\git.exe"
+		msBuildLogger="C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll"
+
+		projectLabel="$(projectProfile)_Contoso"
+		checkoutDir="C:\CCNet\$(projectLabel)\checkoutdir"
+		solutionDir="C:\CCNet\$(projectLabel)\checkoutdir\ContosoUniversity"
+		artefactDir="C:\CCNet\$(projectLabel)\Artifacts"
+		stateDir="C:\CCNet\$(projectLabel)\State"
+		buildFile="CIBuild.proj"
+
+		reports="ContosoUniversity\reports"
+		reportsMSTestIT="ContosoUniversity\reports\mstest.it"
+		reportsMSTestUT="ContosoUniversity\reports\mstest.ut"
+		reportsNUTestIT="ContosoUniversity\reports\nutest.it"
+		reportsNUTestUT="ContosoUniversity\reports\nutest.ut"
+		>
+
+		<project name="$(projectLabel)" queue="Q1" queuePriority="1">
+
+			<workingDirectory>$(checkoutDir)</workingDirectory>
+			<artifactDirectory>$(artefactDir)</artifactDirectory>
+			<state type="state" directory="$(StateDir)" />
+
+			<webURL>http://localhost/ccnet</webURL>
+
+			<cb:include href="$(projectProfile)\ccnet.config.triggers"/>
+
+			<cb:include href="$(projectProfile)\ccnet.config.sourcecontrol.git"/>
+
+			<cb:include href="$(projectProfile)\ccnet.config.tasks"/>
+
+		</project>
+
+	</cb:scope>
+
+</cb:config-template>

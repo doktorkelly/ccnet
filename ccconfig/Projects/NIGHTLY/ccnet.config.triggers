@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+	<triggers>
+		<filterTrigger startTime="$(pauseStart)" endTime="$(pauseEnd)">
+			<trigger type="intervalTrigger" initialSeconds="0" seconds="120"/>
+		</filterTrigger>
+	</triggers>
+
+</cb:config-template>

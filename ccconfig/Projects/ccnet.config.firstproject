@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+		<cb:scope
+			projectLabel="$(projectProfile)_MyFirstProject"
+			pingExe="C:\Windows\system32\PING.EXE"
+			artifactDir="C:\CCNet\$(projectLabel)\Artifacts"
+			stateDir="C:\CCNet\$(projectLabel)\State"
+			workingDir="C:\CCNet\$(projectLabel)\Source"
+			>
+
+					<project
+						name="$(projectLabel)"
+						queue="Q1"
+						queuePriority="2"
+						description="demoproject showing a small config">
+
+						<state type="state" directory="$(stateDir)" />
+						<artifactDirectory>$(artifactDir)</artifactDirectory>
+						<workingDirectory>$(workingDir)</workingDirectory>
+
+						<triggers>
+							<intervalTrigger
+								name="continuous"
+								seconds="30"
+								buildCondition="IfModificationExists"
+								initialSeconds="5"/>
+						</triggers>
+
+						<sourcecontrol 	
+							type="nullSourceControl"
+							alwaysModified="true">
+						</sourcecontrol>
+
+						<tasks>
+							<exec>
+								<executable>$(pingExe)</executable>
+								<buildArgs>localhost</buildArgs>
+								<buildTimeoutSeconds>15</buildTimeoutSeconds>
+								<description>Pinging a server</description>
+							</exec>
+						</tasks>
+
+						<publishers>
+							<xmllogger />
+							<artifactcleanup 
+								cleanUpMethod="KeepLastXBuilds"
+								cleanUpValue="50" />
+						</publishers>
+
+					</project>
+
+	</cb:scope>
+
+</cb:config-template>
