@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- ======================================================================= -->
+<!-- ccnet.config.definitions:                                               -->
+<!-- ======================================================================= -->
+
+<cb:config-template xmlns:cb="urn:ccnet.config.builder">
+
+	<cb:define
+		msBuild="C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
+		svnExe="C:\Program Files\TortoiseSVN\bin\svn.exe"
+		msBuildLogger="C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll"
+
+		artefactDir="C:\CCNet\$(projectLabel)\Artifacts"
+		stateDir="C:\CCNet\$(projectLabel)\State"
+		workingDir="C:\CCNet\$(projectLabel)\Source"
+		solutionDir="C:\CCNet\$(projectLabel)\Source"
+		checkoutDir="C:\CCNet\$(projectLabel)\Source"
+		checkoutUrl="https://develooper.svn.cloudforge.com/framework"
+		buildFile="Build.proj"
+
+		reports="$(projectName)\reports"
+		reportsMSTestIT="$(projectName)\reports\mstest.it"
+		reportsMSTestUT="$(projectName)\reports\mstest.ut"
+		reportsNUTestIT="$(projectName)\reports\nutest.it"
+		reportsNUTestUT="$(projectName)\reports\nutest.ut"
+		>
+
+	</cb:define>
+
+</cb:config-template>

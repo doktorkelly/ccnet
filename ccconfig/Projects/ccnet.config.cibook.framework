@@ -10,44 +10,35 @@
 
 <cb:config-template xmlns:cb="urn:ccnet.config.builder">
 
-	<cb:scope
-		msBuild="C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
-		svnExe="C:\Program Files\TortoiseSVN\bin\svn.exe"
-		msBuildLogger="C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll"
+		<!-- specific settings: -->
+		<cb:define
+			projectName="Framework"
+			projectLabel="$(projectProfile)_$(projectName)"/>
 
-		projectLabel="$(projectProfile)_Framework"
+		<!-- global settings: -->
+		<cb:include href="$(projectProfile)\ccnet.config.definitions" />
 
-		artefactDir="C:\CCNet\$(projectLabel)\Artifacts"
-		stateDir="C:\CCNet\$(projectLabel)\State"
-		workingDir="C:\CCNet\$(projectLabel)\Source"
-		solutionDir="C:\CCNet\$(projectLabel)\Source"
-		checkoutDir="C:\CCNet\$(projectLabel)\Source"
-		checkoutUrl="https://develooper.svn.cloudforge.com/framework"
-		buildFile="Build.proj"
+		<!-- override settings: -->
+		<cb:scope
+			checkoutUrl="https://develooper.svn.cloudforge.com/framework"
+			checkoutDir="C:\CCNet\$(projectLabel)\Source">
 
-		reports="ContosoUniversity\reports"
-		reportsMSTestIT="ContosoUniversity\reports\mstest.it"
-		reportsMSTestUT="ContosoUniversity\reports\mstest.ut"
-		reportsNUTestIT="ContosoUniversity\reports\nutest.it"
-		reportsNUTestUT="ContosoUniversity\reports\nutest.ut"
-		>
+			<project name="$(projectLabel)" queue="Q1" queuePriority="1">
 
-		<project name="$(projectLabel)" queue="Q1" queuePriority="1">
+				<workingDirectory>$(checkoutDir)</workingDirectory>
+				<artifactDirectory>$(artefactDir)</artifactDirectory>
+				<state type="state" directory="$(StateDir)" />
 
-			<workingDirectory>$(checkoutDir)</workingDirectory>
-			<artifactDirectory>$(artefactDir)</artifactDirectory>
-			<state type="state" directory="$(StateDir)" />
+				<webURL>http://localhost/ccnet</webURL>
 
-			<webURL>http://localhost/ccnet</webURL>
+				<cb:include href="$(projectProfile)\ccnet.config.triggers"/>
 
-			<cb:include href="$(projectProfile)\ccnet.config.triggers"/>
+				<cb:include href="$(projectProfile)\ccnet.config.sourcecontrol.svn"/>
 
-			<cb:include href="$(projectProfile)\ccnet.config.sourcecontrol.svn"/>
+				<cb:include href="$(projectProfile)\ccnet.config.tasks"/>
 
-			<cb:include href="$(projectProfile)\ccnet.config.tasks"/>
+			</project>
 
-		</project>
-
-	</cb:scope>
+		</cb:scope>
 
 </cb:config-template>
